@@ -65,4 +65,8 @@ async function sendIssueNotification({
   );
 }
 
-module.exports = { sendPullRequestNotification, sendIssueNotification };
+module.exports = {
+  sendPullRequestNotification,
+  sendIssueNotification,
+  postMessageChannel,
+};

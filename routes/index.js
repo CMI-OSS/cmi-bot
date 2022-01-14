@@ -1,6 +1,7 @@
 const {
   sendPullRequestNotification,
   sendIssueNotification,
+  postMessageChannel,
 } = require("../app/slack");
 
 const express = require("express");
@@ -12,7 +13,6 @@ const 테스트 = "C02R2GVEYS2";
 const 알림채널 = process.env.NODE_ENV === "development" ? 테스트 : 충림이_알림;
 
 router.post("/github", function (req, res) {
-  console.log(req.body);
   if (req.body.action === "opened") {
     if (req.body.pull_request) {
       const { pull_request } = req.body;
@@ -38,6 +38,11 @@ router.post("/github", function (req, res) {
     }
   }
 
+  res.send(200);
+});
+
+router.get("/slack", function (req, res) {
+  postMessageChannel(req.query.message, 알림채널);
   res.send(200);
 });
 
