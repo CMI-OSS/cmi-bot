@@ -15,7 +15,7 @@ const 알림채널 = process.env.NODE_ENV === "development" ? 테스트 : 충림
 router.post("/github", function (req, res) {
   if (req.body.action === "opened") {
     if (req.body.pull_request) {
-      const { pull_request } = req.body;
+      const { pull_request, repository } = req.body;
 
       sendPullRequestNotification({
         channelId: 알림채널,
