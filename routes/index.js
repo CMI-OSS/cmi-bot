@@ -46,4 +46,9 @@ router.get("/slack", function (req, res) {
   res.send(200);
 });
 
+router.get("/test/slack", function (req, res) {
+  postMessageChannel(req.query.message, 테스트);
+  res.send(200);
+});
+
 module.exports = router;
