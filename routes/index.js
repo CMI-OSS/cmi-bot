@@ -6,7 +6,7 @@ const {
 const express = require("express");
 const router = express.Router();
 
-const 충림이_알림 = "C02R2GVEYS2";
+const 충림이_알림 = "C02KD9Z8A83";
 const 테스트 = "C02R2GVEYS2";
 
 const 알림채널 = process.env.NODE_ENV === "development" ? 테스트 : 충림이_알림;
