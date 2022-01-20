@@ -46,8 +46,9 @@ test("test parseDate", () => {
   });
 
   expect(parseDate("이번주 수요일 오후 7시 30분")).toStrictEqual({
-    repeat: "매주",
-    week: "수",
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    date: new Date().getDate(),
     hour: 19,
     minute: 30,
     seconds: 0,
