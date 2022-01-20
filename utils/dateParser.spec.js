@@ -21,12 +21,21 @@ const answer3 = {
   year: new Date().getFullYear(),
   month: new Date().getMonth() + 1,
   date: new Date().getDate(),
+  hour: 17,
+  minute: 0,
+  seconds: 0,
+};
+
+const answer4 = {
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1,
+  date: new Date().getDate(),
   hour: 18,
   minute: 30,
   seconds: 0,
 };
 
-const answe4 = {
+const answe5 = {
   repeat: "매달",
   date: 15,
   hour: 10,
@@ -50,15 +59,15 @@ test("test parseDate", () => {
     },
     {
       case: "5시에",
-      answer: answer2,
-    },
-    {
-      case: "6시 30분에",
       answer: answer3,
     },
     {
+      case: "6시 30분에",
+      answer: answer4,
+    },
+    {
       case: "매달 15일 오전 10시 30분",
-      answer: answe4,
+      answer: answe5,
     },
   ];
 
