@@ -43,35 +43,34 @@ const answe5 = {
   seconds: 0,
 };
 
-test("test parseDate", () => {
-  const testCases = [
-    {
-      case: "2022년 1월 9일 오후 7시 30분",
-      answer: answer1,
-    },
-    {
-      case: "1월 9일 오후 7시 30분",
-      answer: answer1,
-    },
-    {
-      case: "매주 수요일 오후 7시 30분",
-      answer: answer2,
-    },
-    {
-      case: "5시에",
-      answer: answer3,
-    },
-    {
-      case: "6시 30분에",
-      answer: answer4,
-    },
-    {
-      case: "매달 15일 오전 10시 30분",
-      answer: answe5,
-    },
-  ];
-
-  for (const testCase of testCases) {
+const testCases = [
+  {
+    case: "2022년 1월 9일 오후 7시 30분",
+    answer: answer1,
+  },
+  {
+    case: "1월 9일 오후 7시 30분",
+    answer: answer1,
+  },
+  {
+    case: "매주 수요일 오후 7시 30분",
+    answer: answer2,
+  },
+  {
+    case: "5시에",
+    answer: answer3,
+  },
+  {
+    case: "6시 30분에",
+    answer: answer4,
+  },
+  {
+    case: "매달 15일 오전 10시 30분",
+    answer: answe5,
+  },
+];
+for (const testCase of testCases) {
+  it(testCase.case, () => {
     expect(parseDate(testCase.case)).toStrictEqual(testCase.answer);
-  }
-});
+  });
+}
