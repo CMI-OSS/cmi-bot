@@ -1,45 +1,33 @@
 function parseDate(stringDate) {
-  const toNumber = /[^0-9]/g;
-  const isYear = /....년/g;
-  const isMonth = /..월/g;
-  const isDaily = /매./g;
-  const isDate = /..일/g;
-  const isHour = /..시/g || /..시./g;
-  const isMinute = /..분/g || /..분./g;
-  const isSecond = /..초/g;
-  const isWeek = /.요일/g;
-  const isAM = /오전/g;
-  const isThis = /이번./g;
+  const regNumber = /[^0-9]/g;
+  const regYear = /....년/;
+  const regMonth = /..월/;
+  const regDaily = /매./;
+  const regDate = /..일/;
+  const regHour = /..시/;
+  const regMinute = /..분/;
+  const regSecond = /..초/;
+  const regWeek = /.요일/;
+  const regAM = /오전/;
 
-  const year = isYear.test(stringDate)
-    ? parseInt(stringDate.match(isYear)[0].replace(toNumber, ""))
-    : new Date().getFullYear();
+  function parseValue(reg, stringDate, elseValue) {
+    return reg.test(stringDate)
+      ? parseInt(stringDate.match(reg)[0].replace(regNumber, ""))
+      : elseValue;
+  }
 
-  const month = isMonth.test(stringDate)
-    ? parseInt(stringDate.match(isMonth)[0].replace(toNumber, ""))
-    : new Date().getMonth() + 1;
-
-  const date = isDate.test(stringDate)
-    ? parseInt(stringDate.match(isDate)[0].replace(toNumber, ""))
-    : new Date().getDate();
-
-  let hour = parseInt(stringDate.match(isHour)[0].replace(toNumber, ""));
-  if (!isAM.test(stringDate)) {
+  const year = parseValue(regYear, stringDate, new Date().getFullYear());
+  const month = parseValue(regMonth, stringDate, new Date().getMonth() + 1);
+  const date = parseValue(regDate, stringDate, new Date().getDate());
+  const minute = parseValue(regMinute, stringDate, 0);
+  const seconds = parseValue(regSecond, stringDate, 0);
+  let hour = parseValue(regHour, stringDate, 0);
+  if (!regAM.test(stringDate)) {
     hour += 12;
   }
 
-  const minute = isMinute.test(stringDate)
-    ? parseInt(stringDate.match(isMinute)[0].replace(toNumber, ""))
-    : 0;
-
-  const seconds = isSecond.test(stringDate)
-    ? parseInt(stringDate.match(isSecond)[0].replace(toNumber, ""))
-    : 0;
-
-  // 매일, 매주 또는 매달
-
-  if (isDaily.test(stringDate)) {
-    const repeat = stringDate.match(isDaily)[0];
+  if (regDaily.test(stringDate)) {
+    const repeat = stringDate.match(regDaily)[0];
 
     if (repeat === "매일") {
       return {
@@ -51,8 +39,7 @@ function parseDate(stringDate) {
     }
 
     if (repeat === "매주") {
-      const week = stringDate.match(isWeek)[0][0];
-
+      const week = stringDate.match(regWeek)[0][0];
       return {
         repeat,
         week,
@@ -73,19 +60,6 @@ function parseDate(stringDate) {
     }
   }
 
-  // 이번주, 이번달, 이번년
-  if (isThis.test(stringDate)) {
-  }
-
-  console.log({
-    year,
-    month,
-    date,
-    hour,
-    minute,
-    seconds,
-  });
-
   return {
     year,
     month,
@@ -95,9 +69,6 @@ function parseDate(stringDate) {
     seconds,
   };
 }
-
-const stringDate = "2021년 1월 9일 오후 7시 30분";
-parseDate(stringDate);
 
 module.exports = {
   parseDate,
