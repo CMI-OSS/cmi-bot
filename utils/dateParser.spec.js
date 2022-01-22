@@ -50,6 +50,17 @@ const answer6 = {
   seconds: 0,
 };
 
+const answer7 = {
+  ...answer3,
+  hour: 10,
+};
+
+const answer8 = {
+  ...answer3,
+  date: new Date().getDate() + 1,
+  hour: 19,
+};
+
 const testCases = [
   {
     case: "2022년 1월 9일 오후 7시 30분",
@@ -78,6 +89,18 @@ const testCases = [
   {
     case: "매일 오전 9시 30분",
     answer: answer6,
+  },
+  {
+    case: "오전 10시에",
+    answer: answer7,
+  },
+  {
+    case: "내일 오후 7시",
+    answer: answer8,
+  },
+  {
+    case: "오늘 오후 5시",
+    answer: answer3,
   },
 ];
 for (const testCase of testCases) {
