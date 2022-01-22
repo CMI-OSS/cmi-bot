@@ -35,10 +35,17 @@ const answer4 = {
   seconds: 0,
 };
 
-const answe5 = {
+const answer5 = {
   repeat: "매달",
   date: 15,
   hour: 10,
+  minute: 30,
+  seconds: 0,
+};
+
+const answer6 = {
+  repeat: "매일",
+  hour: 9,
   minute: 30,
   seconds: 0,
 };
@@ -66,7 +73,11 @@ const testCases = [
   },
   {
     case: "매달 15일 오전 10시 30분",
-    answer: answe5,
+    answer: answer5,
+  },
+  {
+    case: "매일 오전 9시 30분",
+    answer: answer6,
   },
 ];
 for (const testCase of testCases) {
