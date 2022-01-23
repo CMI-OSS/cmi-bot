@@ -102,6 +102,14 @@ const testCases = [
     case: "오늘 오후 5시",
     answer: answer3,
   },
+  {
+    case: "1월 9일 7시 30분",
+    answer: answer1,
+  },
+  {
+    case: "9일 오후 7시 30분",
+    answer: answer1,
+  },
 ];
 for (const testCase of testCases) {
   it(testCase.case, () => {

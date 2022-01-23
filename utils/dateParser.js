@@ -1,12 +1,12 @@
 function parseDate(stringDate) {
   const regNotNumber = /[^0-9]/g;
-  const regYear = /....년/;
-  const regMonth = /..월/;
+  const regYear = /[0-9]*년/;
+  const regMonth = /[0-9]*월/;
   const regDaily = /매./;
-  const regDay = /..일/;
+  const regDay = /[0-9]*일/;
   const regHour = /[0-9]*시/;
-  const regMinute = /..분/;
-  const regSecond = /..초/;
+  const regMinute = /[0-9]*분/;
+  const regSecond = /[0-9]*초/;
   const regWeek = /.요일/;
   const regAM = /오전/;
   const regTomorrow = /내일/;
@@ -25,18 +25,23 @@ function parseDate(stringDate) {
       : defaultValue;
   }
 
+  function regDailyAndWeekSplit(reg, stringDate) {
+    return stringDate.match(reg)[0];
+  }
+
   const year = parsing(regYear, stringDate, new Date().getFullYear());
   const month = parsing(regMonth, stringDate, new Date().getMonth() + 1);
   const minute = parsing(regMinute, stringDate, 0);
   const seconds = parsing(regSecond, stringDate, 0);
   let date = parsing(regDay, stringDate, new Date().getDate());
   let hour = parsing(regHour, stringDate, 0);
+
   if (!isRegExist(regAM, stringDate)) {
     hour += 12;
   }
 
   if (isRegExist(regDaily, stringDate)) {
-    const repeat = stringDate.match(regDaily)[0];
+    const repeat = regDailyAndWeekSplit(regDaily, stringDate);
 
     if (repeat === "매일") {
       return {
@@ -48,7 +53,8 @@ function parseDate(stringDate) {
     }
 
     if (repeat === "매주") {
-      const week = stringDate.match(regWeek)[0][0];
+      const week = regDailyAndWeekSplit(regWeek, stringDate)[0];
+
       return {
         repeat,
         week,
@@ -70,7 +76,7 @@ function parseDate(stringDate) {
   }
 
   if (isRegExist(regTomorrow, stringDate)) {
-    date += 1;
+    date = new Date().getDate() + 1;
 
     return {
       year,
