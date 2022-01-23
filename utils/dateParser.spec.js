@@ -103,10 +103,6 @@ const testCases = [
     answer: answer3,
   },
   {
-    case: "1월 9일 7시 30분",
-    answer: answer1,
-  },
-  {
     case: "9일 오후 7시 30분",
     answer: answer1,
   },
