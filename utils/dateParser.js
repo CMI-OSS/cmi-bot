@@ -9,8 +9,9 @@ function parseDate(stringDate) {
   const regSecond = /..초/;
   const regWeek = /.요일/;
   const regAM = /오전/;
+  const regTomorrow = /내일/;
 
-  function isExist(reg, stringDate) {
+  function isRegExist(reg, stringDate) {
     return reg.test(stringDate);
   }
 
@@ -19,22 +20,22 @@ function parseDate(stringDate) {
   }
 
   function parsing(reg, stringDate, defaultValue) {
-    return isExist(reg, stringDate)
+    return isRegExist(reg, stringDate)
       ? stringDateSplit(reg, stringDate)
       : defaultValue;
   }
 
   const year = parsing(regYear, stringDate, new Date().getFullYear());
   const month = parsing(regMonth, stringDate, new Date().getMonth() + 1);
-  const date = parsing(regDay, stringDate, new Date().getDate());
   const minute = parsing(regMinute, stringDate, 0);
   const seconds = parsing(regSecond, stringDate, 0);
+  let date = parsing(regDay, stringDate, new Date().getDate());
   let hour = parsing(regHour, stringDate, 0);
-  if (!isExist(regAM, stringDate)) {
+  if (!isRegExist(regAM, stringDate)) {
     hour += 12;
   }
 
-  if (isExist(regDaily, stringDate)) {
+  if (isRegExist(regDaily, stringDate)) {
     const repeat = stringDate.match(regDaily)[0];
 
     if (repeat === "매일") {
@@ -66,6 +67,19 @@ function parseDate(stringDate) {
         seconds,
       };
     }
+  }
+
+  if (isRegExist(regTomorrow, stringDate)) {
+    date += 1;
+
+    return {
+      year,
+      month,
+      date,
+      hour,
+      minute,
+      seconds,
+    };
   }
 
   return {
