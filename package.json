@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "cross-env NODE_ENV=development nodemon ./bin/www"
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@slack/web-api": "^6.5.1",
@@ -17,5 +18,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }
