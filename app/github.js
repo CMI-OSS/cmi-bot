@@ -9,22 +9,25 @@ const fetchGithub = async () => {
       "https://api.github.com/repos/CMI-OSS/cbnu-alrami/pulls",
       {
         headers: {
-          Authorization: `token ${env.GITHUB_TOKEN}`,
+          Authorization: `token ${process.env.GITHUB_TOKEN}`,
         },
       }
     );
     repos.data.forEach((repo) => {
+      console.log(repo._links.html.href);
       !repo.draft &&
         prList.push({
           loginId: repo.user.login,
           full_name: repo.base.repo.full_name,
           html_url: repo.base.repo.html_url,
-          url: repo.url,
+          url: repo._links.html.href,
           title: repo.title,
           created_at: repo.created_at,
         });
     });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err, "err");
+  }
 };
 
 const scheduleGithub = async () => {
