@@ -21,7 +21,6 @@ const getCmiMemberNickname = (loginId) => {
 };
 
 async function postMessageChannel(text, channelId) {
-  console.log(text);
   await web.chat.postMessage({ text, channel: channelId });
 }
 
@@ -47,6 +46,19 @@ async function sendPullRequestNotification({
   );
 }
 
+async function sendForgotPullRequestNotification(pr) {
+  const { loginId, full_name, html_url, url, title, diffDate } = pr;
+  postMessageChannel(
+    `[${getLinkText(
+      full_name,
+      html_url
+    )}] ${diffDate}일이 지난 PR이 있습니다🤕 소중한 코드리뷰 부탁드려요~ 🙏 \n<${url}|${title}> by ${getCmiMemberNickname(
+      loginId
+    )}`,
+    "C02KD9Z8A83"
+  );
+}
+
 async function sendIssueNotification({
   repository,
   channelId,
@@ -68,5 +80,6 @@ async function sendIssueNotification({
 module.exports = {
   sendPullRequestNotification,
   sendIssueNotification,
+  sendForgotPullRequestNotification,
   postMessageChannel,
 };

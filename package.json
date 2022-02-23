@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@slack/web-api": "^6.5.1",
+    "axios": "^0.26.0",
     "cookie-parser": "~1.4.4",
     "cross-env": "^7.0.3",
     "debug": "~2.6.9",
@@ -15,7 +16,10 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsdom": "^19.0.0",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.15"
+    "node-schedule": "^2.1.0",
+    "nodemon": "^2.0.15",
+    "puppeteer": "^13.4.0"
   }
 }
