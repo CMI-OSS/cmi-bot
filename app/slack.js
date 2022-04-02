@@ -25,6 +25,9 @@ async function postMessageChannel(text, channelId) {
 }
 
 function getLinkText(text, url) {
+
+  if(!url) return text
+
   return `<${url}|${text}>`;
 }
 
@@ -77,9 +80,36 @@ async function sendIssueNotification({
   );
 }
 
+
+
+async function sendConferenceRemind({
+  team,
+  channelId,
+}) {
+  postMessageChannel(
+    `[리마인드] ${team} 주간회의 10분전 입니다 10분뒤에 ${getLinkText("게더타운","https://gather.town/app/tUzo8dIpHJRUdHJY/CMI")}에서 만나요~👋`,
+    channelId
+  );
+}
+
+
+async function sendStudyRemind({
+  study,
+  channelId,
+  link
+}) {
+  postMessageChannel(
+    `[리마인드] ${getLinkText(study,link)} 10분전 입니다 10분뒤에 ${getLinkText("게더타운","https://gather.town/app/tUzo8dIpHJRUdHJY/CMI")}에서 만나요~👋`,
+    channelId
+  );
+}
+
+
 module.exports = {
   sendPullRequestNotification,
   sendIssueNotification,
   sendForgotPullRequestNotification,
+  sendConferenceRemind,
+  sendStudyRemind,
   postMessageChannel,
 };

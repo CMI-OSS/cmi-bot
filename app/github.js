@@ -1,17 +1,22 @@
 const { default: axios } = require("axios");
 const { sendForgotPullRequestNotification } = require("./slack");
 
+
 const prList = [];
-const notiPrList = [];
+
+
 const fetchGithub = async () => {
+
+  
+
   try {
     const repos = await axios.get(
       "https://api.github.com/repos/CMI-OSS/cbnu-alrami/pulls",
-      {
-        headers: {
-          Authorization: `token ${process.env.GITHUB_TOKEN}`,
-        },
-      }
+      // {
+      //   headers: {
+      //     Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      //   },
+      // }
     );
     repos.data.forEach((repo) => {
       console.log(repo._links.html.href);
@@ -31,6 +36,9 @@ const fetchGithub = async () => {
 };
 
 const scheduleGithub = async () => {
+
+  const notiPrList = [];
+
   await fetchGithub();
   prList.forEach((pr) => {
     const diffDate = Math.floor(
@@ -41,6 +49,7 @@ const scheduleGithub = async () => {
       notiPrList.push({ ...pr, diffDate });
     }
   });
+
 
   notiPrList.forEach((pr) => {
     sendForgotPullRequestNotification(pr);
