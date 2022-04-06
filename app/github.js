@@ -2,11 +2,12 @@ const { default: axios } = require("axios");
 const { sendForgotPullRequestNotification } = require("./slack");
 
 
-const prList = [];
+let prList = [];
 
 
 const fetchGithub = async () => {
 
+  prList = []
   
 
   try {
