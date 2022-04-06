@@ -2,6 +2,7 @@ const {
   sendPullRequestNotification,
   sendIssueNotification,
   postMessageChannel,
+  sendDiscussionNotification,
 } = require("../app/slack");
 
 const express = require("express");
@@ -34,6 +35,20 @@ router.post("/github", function (req, res) {
         url: issue.html_url,
         title: issue.title,
         loginId: issue.user.login,
+      });
+    }
+  }
+
+  if (req.body.action === "created") {
+    if (req.body.discussion) {
+      const { discussion, repository } = req.body;
+
+      sendDiscussionNotification({
+        channelId: 알림채널,
+        repository: repository,
+        url: discussion.html_url,
+        title: discussion.title,
+        loginId: discussion.user.login,
       });
     }
   }
