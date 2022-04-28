@@ -46,7 +46,7 @@ const scheduleGithub = async () => {
       Math.abs(new Date(pr.created_at).getTime() - new Date().getTime()) /
         (1000 * 60 * 60 * 24)
     );
-    if (diffDate >= 3) {
+    if (diffDate >= 4) {
       notiPrList.push({ ...pr, diffDate });
     }
   });
