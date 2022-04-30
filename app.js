@@ -31,11 +31,11 @@ const dontForget = schedule.scheduleJob("0 0 16 * * 1-5", function () {
 
 
 
-schedule.scheduleJob({hour: 22, minute: 20, dayOfWeek: 7}, function(){
+schedule.scheduleJob({hour: 21, minute: 50, dayOfWeek: 0}, function(){
   sendStudyRemind({study:"타입스크립트 스터디",channelId:타입스크립트_스터디,link:"https://github.com/CMI-OSS/study/tree/main/typescript"})
 });
 
- schedule.scheduleJob({hour: 22, minute: 20, dayOfWeek: 6}, function(){
+ schedule.scheduleJob({hour: 21, minute: 50, dayOfWeek: 6}, function(){
   sendConferenceRemind({team:"프론트엔드",channelId:충림이_프론트엔드})
 });
 
