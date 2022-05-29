@@ -31,7 +31,7 @@ const dontForget = schedule.scheduleJob("0 0 16 * * 1-5", function () {
 
 
 
-schedule.scheduleJob({hour: 21, minute: 50, dayOfWeek: 0}, function(){
+schedule.scheduleJob({hour: 10, minute: 50, dayOfWeek: 0}, function(){
   sendStudyRemind({study:"타입스크립트 스터디",channelId:타입스크립트_스터디,link:"https://github.com/CMI-OSS/study/tree/main/typescript"})
 });
 
