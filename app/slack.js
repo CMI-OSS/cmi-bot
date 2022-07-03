@@ -16,6 +16,7 @@ const getCmiMemberNickname = (loginId) => {
     ["vcho1958", "애드워드"],
     ["soonitoon", "수니툰"],
     ["Phlox09022", "플록스"],
+    ["Semy-sudo","세미"]
   ]);
 
   return cmiMember.get(loginId) || loginId;
