@@ -8,8 +8,7 @@ const getCmiMemberNickname = (loginId) => {
   const cmiMember = new Map([
     ["kingyong9169", "브루니"],
     ["ionc635", "스티븐"],
-    ["JeongHyeongKim", "조나슨"],
-    ["nohgijin", "트레저"],
+    ["nohgijin", "클로이"],
     ["thdwlsgus0", "스캇"],
     ["EunjiShin", "우디"],
     ["jaryapp", "제스"],
