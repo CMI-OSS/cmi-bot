@@ -37,7 +37,7 @@ const dontForget = schedule.scheduleJob("0 0 16 * * 1-5", function () {
 //   });
 // });
 
-schedule.scheduleJob({ hour: 10, minute: 20, dayOfWeek: 0 }, function () {
+schedule.scheduleJob({ hour: 19, minute: 50, dayOfWeek: 0 }, function () {
   sendConferenceRemind({ team: "프론트엔드", channelId: 충림이_프론트엔드 });
 });
 
