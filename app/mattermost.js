@@ -47,7 +47,7 @@ async function sendPullRequestNotification({
   sendMessageToChannel({
     text: `[충림이v2](${
       repository.html_url
-    }) 새로운 PR이 도착했습니다. 소중한 코드리뷰 부탁드려요~ 🙏 \n[${url}](${title}) by ${getCmiMemberNickname(
+    }) 새로운 PR이 도착했습니다. 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by ${getCmiMemberNickname(
       loginId,
     )}`,
     channel: getChannelByPackage(title),
@@ -58,7 +58,7 @@ async function sendForgotPullRequestNotification(pr) {
   const { loginId, full_name, html_url, url, title, diffDate } = pr
 
   sendMessageToChannel({
-    text: `[충림이v2](${html_url}) ${diffDate}일이 지난 PR이 있습니다🤕 소중한 코드리뷰 부탁드려요~ 🙏 \n[${url}](${title}) by ${getCmiMemberNickname(
+    text: `[충림이v2](${html_url}) ${diffDate}일이 지난 PR이 있습니다🤕 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by ${getCmiMemberNickname(
       loginId,
     )}`,
     channel: getChannelByPackage(title),
@@ -69,7 +69,7 @@ async function sendIssueNotification({ repository, url, title, loginId }) {
   sendMessageToChannel({
     text: `[충림이v2](${
       repository.html_url
-    }) 새로운 이슈가 도착했습니다. 어떤 내용일까요? 🥳 \n[${url}](${title}) by ${getCmiMemberNickname(
+    }) 새로운 이슈가 도착했습니다. 어떤 내용일까요? 🥳 \n[${title}](${url}) by ${getCmiMemberNickname(
       loginId,
     )}`,
     channel: getChannelByPackage(title),
