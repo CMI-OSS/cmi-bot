@@ -1,7 +1,8 @@
 const axios = require("axios")
 const { getCmiMemberNickname } = require("./github")
 
-const mattermostServer = "https://chat.cmi.kro.kr"
+const mattermostServer = "http://192.168.219.152:8065"
+
 
 const 크미봇 = {
   username: "크미봇",
