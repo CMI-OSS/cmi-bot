@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@slack/web-api": "^6.5.1",
-    "axios": "^0.26.0",
+    "axios": "^1.2.6",
     "cookie-parser": "~1.4.4",
     "cross-env": "^7.0.3",
     "debug": "~2.6.9",
@@ -21,5 +21,10 @@
     "node-schedule": "^2.1.0",
     "nodemon": "^2.0.15",
     "puppeteer": "^13.4.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.3"
   }
 }
