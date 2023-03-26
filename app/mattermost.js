@@ -1,7 +1,7 @@
 const axios = require("axios")
 const { getCmiMemberNickname } = require("./github")
 
-const mattermostServer = "http://192.168.219.152:8065"
+const mattermostServer = "http://192.168.219.188:8065"
 
 
 const 크미봇 = {
