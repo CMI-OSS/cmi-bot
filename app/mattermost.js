@@ -15,7 +15,7 @@ const CHANNEL = {
   충림이: "cbnu_alrami",
   충림이_BE: "cbnu_alrami_be",
   충림이_FE: "cbnu_alrami_FE",
-  충림이_ADMIN: "cbnu_alrami_FE",
+  충림이_ADMIN: "cbnu_alrami_admin",
   충림이_SCRAPER: "cbnu_alrami_scraper",
   충림이_NATIVE: "cbnu_alrami_native",
   충림이_알림: "cbnu_alrami_notice",
