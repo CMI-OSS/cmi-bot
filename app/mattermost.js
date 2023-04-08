@@ -1,5 +1,6 @@
 const axios = require("axios")
 const { getCmiMemberNickname } = require("./github")
+const { getMattermostId } = require("./cmi")
 
 const mattermostServer = "http://192.168.219.190:8065"
 
@@ -42,12 +43,10 @@ async function sendPullRequestNotification({
   title,
   loginId,
 }) {
+  const sender = getMattermostId({ githubLoginId: loginId })
+
   sendMessageToChannel({
-    text: `[충림이v2](${
-      repository.html_url
-    }) 새로운 PR이 도착했습니다. 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by ${getCmiMemberNickname(
-      loginId,
-    )}`,
+    text: `[충림이v2](${repository.html_url}) 새로운 PR이 도착했습니다. 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by @${sender.mattermost}`,
     channel: getChannelByPackage(title),
   })
 }
@@ -56,7 +55,7 @@ async function sendForgotPullRequestNotification(pr) {
   const { loginId, full_name, html_url, url, title, diffDate } = pr
 
   sendMessageToChannel({
-    text: `[충림이v2](${html_url}) ${diffDate}일이 지난 PR이 있습니다🤕 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by ${getCmiMemberNickname(
+    text: `[충림이v2](${html_url}) ${diffDate}일이 지난 PR이 있습니다 🤕 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by ${getCmiMemberNickname(
       loginId,
     )}`,
     channel: getChannelByPackage(title),
@@ -64,13 +63,49 @@ async function sendForgotPullRequestNotification(pr) {
 }
 
 async function sendIssueNotification({ repository, url, title, loginId }) {
+  const sender = getMattermostId({ githubLoginId: loginId })
+
   sendMessageToChannel({
-    text: `[충림이v2](${
-      repository.html_url
-    }) 새로운 이슈가 도착했습니다. 어떤 내용일까요? 🥳 \n[${title}](${url}) by ${getCmiMemberNickname(
-      loginId,
-    )}`,
+    text: `[충림이v2](${repository.html_url}) 새로운 이슈가 도착했습니다. 어떤 내용일까요? 🥳 \n[${title}](${url}) @${sender.mattermost}`,
     channel: getChannelByPackage(title),
+  })
+}
+
+async function sendMentionNotice({ url, title, body, loginId }) {
+  const pattern = /@(\w+)/g
+
+  let match
+  while ((match = pattern.exec(body))) {
+    const mentionId = match[1]
+
+    const target = getMattermostId({ githubLoginId: mentionId })
+    const sender = getMattermostId({ githubLoginId: loginId })
+
+    if (!target) {
+      logging(
+        `[sendMentionNotice] 등록되지 않은 유저: ${mentionId} [${title}](${url})`,
+      )
+      continue
+    }
+
+    if (!sender) {
+      logging(
+        `[sendMentionNotice] 등록되지 않은 유저: ${loginId} [${title}](${url})`,
+      )
+      continue
+    }
+
+    sendMessageToChannel({
+      text: `[${title}](${url})에서 멘션  되었습니다. 확인 부탁드려요~ 💬 by @${sender.mattermost}\n > ${body}`,
+      channel: `@${target.mattermost}`,
+    })
+  }
+}
+
+async function logging(log) {
+  sendMessageToChannel({
+    text: log,
+    channel: "@jess",
   })
 }
 
@@ -80,4 +115,5 @@ module.exports = {
   sendIssueNotification,
   sendMessageToChannel,
   sendPullRequestNotification,
+  sendMentionNotice,
 }

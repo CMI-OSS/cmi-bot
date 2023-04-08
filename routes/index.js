@@ -2,6 +2,7 @@ const express = require("express")
 const {
   sendPullRequestNotification,
   sendIssueNotification,
+  sendMentionNotice,
 } = require("../app/mattermost")
 const { sendDiscussionNotification } = require("../app/slack")
 const router = express.Router()
@@ -45,6 +46,23 @@ router.post("/github", function (req, res) {
         title: discussion.title,
         loginId: discussion.user.login,
       })
+    }
+
+    if (req.body.comment) {
+      if (req.body.comment) {
+        // const { repository } = req.body
+
+        const { title } = req.body.issue
+        const { html_url, body } = req.body.comment
+        const { login } = req.body.sender
+
+        sendMentionNotice({
+          title,
+          url: html_url,
+          loginId: login,
+          body,
+        })
+      }
     }
   }
 
