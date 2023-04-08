@@ -96,7 +96,7 @@ async function sendMentionNotice({ url, title, body, loginId }) {
     }
 
     sendMessageToChannel({
-      text: `[${title}](${url})에서 멘션  되었습니다. 확인 부탁드려요~ 💬 by @${sender.mattermost}\n > ${body}`,
+      text: `💬 [${title}](${url})에서 멘션  되었습니다. 확인 부탁드려요~ by @${sender.mattermost}\n > ${body}`,
       channel: `@${target.mattermost}`,
     })
   }
