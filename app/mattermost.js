@@ -1,13 +1,10 @@
 const axios = require("axios")
 const { getCmiMemberNickname } = require("./github")
 
-const mattermostServer = "http://192.168.219.188:8065"
-
+const mattermostServer = "http://192.168.219.190:8065"
 
 const 크미봇 = {
   username: "크미봇",
-  icon_url:
-    "https://user-images.githubusercontent.com/49256790/215345327-f28560e7-7192-45c5-854b-5fbf2c9fb00b.png",
 }
 
 const CHANNEL = {
