@@ -20,7 +20,7 @@ const CHANNEL = {
 }
 
 function sendMessageToChannel({ channel, text }) {
-  axios.post(mattermostServer + "/hooks/ftkau6m8ojr89go5krtxowfaba", {
+  axios.post(mattermostServer + "/hooks/3h41ghg3tb8wzgfop4c17d3mjh", {
     ...크미봇,
     channel,
     text,
@@ -46,7 +46,7 @@ async function sendPullRequestNotification({
   const sender = getMattermostId({ githubLoginId: loginId })
 
   sendMessageToChannel({
-    text: `[충림이v2](${repository.html_url}) 새로운 PR이 도착했습니다. 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by ${sender.korNickname}`,
+    text: `[충림이v2](${repository.html_url}) 새로운 PR이 도착했습니다. 소중한 코드리뷰 부탁드려요~ 🙏 \n[${title}](${url}) by @${sender.mattermost}`,
     channel: getChannelByPackage(title),
   })
 }
@@ -66,7 +66,7 @@ async function sendIssueNotification({ repository, url, title, loginId }) {
   const sender = getMattermostId({ githubLoginId: loginId })
 
   sendMessageToChannel({
-    text: `[충림이v2](${repository.html_url}) 새로운 이슈가 도착했습니다. 어떤 내용일까요? 🥳 \n[${title}](${url}) ${sender.korNickname}`,
+    text: `[충림이v2](${repository.html_url}) 새로운 이슈가 도착했습니다. 어떤 내용일까요? 🥳 \n[${title}](${url}) @${sender.mattermost}`,
     channel: getChannelByPackage(title),
   })
 }
@@ -96,7 +96,7 @@ async function sendMentionNotice({ url, title, body, loginId }) {
     }
 
     sendMessageToChannel({
-      text: `💬 [${title}](${url})에서 멘션  되었습니다. 확인 부탁드려요~ by ${sender.korNickname}\n > ${body}`,
+      text: `💬 [${title}](${url})에서 멘션  되었습니다. 확인 부탁드려요~ by @${sender.mattermost}\n > ${body}`,
       channel: `@${target.mattermost}`,
     })
   }
